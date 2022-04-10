@@ -1,5 +1,4 @@
 UIObject = Object.extend(Object);
-
 function UIObject:new(specs)
     self.x = specs[1];
     self.y = specs[2];
@@ -7,6 +6,8 @@ function UIObject:new(specs)
     self.height = specs[4];
     self.closeSize = specs[5];  --Set to 0 if you do not want a close option.
     self.text = specs[6];
+    self.scaleX = (love.graphics.getWidth());
+    self.scaleY = (love.graphics.getHeight());
 end
 
 function UIObject:draw()
@@ -14,6 +15,16 @@ function UIObject:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height);
     love.graphics.setColor(0, 0, 0);
     love.graphics.printf(self.text, self.x+20, self.y+20, self.width-40, "left");
+    love.graphics.setColor(1, 1, 1);
+end
+
+function UIObject:resize()
+    self.width = self.width * love.graphics.getWidth()/self.scaleX;
+    self.height = self.height * love.graphics.getHeight()/self.scaleY;
+    self.x = self.x * love.graphics.getWidth()/self.scaleX;
+    self.y = self.y * love.graphics.getHeight()/self.scaleY;
+    self.scaleY = love.graphics.getHeight();
+    self.scaleX = love.graphics.getWidth();
 end
 
 function UIObject:update()

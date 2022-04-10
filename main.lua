@@ -1,4 +1,5 @@
 function love.load()
+    
     Object = require "assets/libraries/classic";
     camera = require "assets/libraries/camera";
     listOfBullets = {};
@@ -20,8 +21,7 @@ function love.load()
     world:addCollisionClass("Bullet");
     love.window.setMode(800, 600, {resizable = true});
 
-    font = love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20);
-    love.graphics.setFont(font);
+    love.graphics.setFont(love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20));
 
     player = Player();
     enemys = {};
@@ -107,6 +107,11 @@ function love.draw()
     end
 end
 
+function love.resize()
+    if guiStack:top() ~= nil then
+        guiStack:top():resize();
+    end
+end
     --[[SCRAP CODE]]
     --[[world:setCallbacks(
         function(collider_1, collider_2, contact) 
