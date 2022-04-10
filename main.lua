@@ -1,16 +1,16 @@
 function love.load()
-    Object = require "classic";
-    camera = require "camera";
+    Object = require "assets/libraries/classic";
+    camera = require "assets/libraries/camera";
     listOfBullets = {};
     cam = camera();
-    sti = require "sti";
-    gameMap = sti("map.lua");
+    sti = require "assets/libraries/sti";
+    gameMap = sti("assets/maps/map.lua");
+    wf = require "assets/libraries/windfield";
     require "player";
     require "bullet";
     require "enemy";
     require "stack";
     require "uiobject";
-    wf = require "windfield";
     love.physics.setMeter(10);
     world = wf.newWorld(0, 300, false);
     world:addCollisionClass("Platform");
@@ -20,7 +20,7 @@ function love.load()
     world:addCollisionClass("Bullet");
     love.window.setMode(800, 600, {resizable = true});
 
-    font = love.graphics.newFont("Abaddon_Fonts_v1.2/Abaddon Light.ttf", 20);
+    font = love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20);
     love.graphics.setFont(font);
 
     player = Player();

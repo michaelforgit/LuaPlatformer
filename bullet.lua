@@ -1,7 +1,7 @@
 Bullet = Object:extend(Object);
 
 function Bullet:new(x, y, dir)
-    self.image = love.graphics.newImage("teamgunner/EXTRAS/bullet2.png");
+    self.image = love.graphics.newImage("assets/images/teamgunner/EXTRAS/bullet2.png");
     self.width = 10;
     self.height = 5;
     self.x = x-self.width/2;

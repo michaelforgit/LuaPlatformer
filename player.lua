@@ -30,7 +30,7 @@ function newAnimation(image, width, height, duration)
     return animation
 end
 timer = 0;
-animation = newAnimation(love.graphics.newImage("teamgunner/CHARACTER_SPRITES/Black/Gunner_Black_Run.png"), 48, 48, 1)
+animation = newAnimation(love.graphics.newImage("assets/images/teamgunner/CHARACTER_SPRITES/Black/Gunner_Black_Run.png"), 48, 48, 1)
 debounce = false;
 function Player:update(dt)
     self.x = self.collider:getX()-self.width/2;
