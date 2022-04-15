@@ -12,15 +12,18 @@ function love.load()
     require "enemy";
     require "stack";
     require "uiobject";
-    love.physics.setMeter(10);
+    require "collidable";
+    require "9slice";
+
+    --testingBox = Slice(0, 0, 500, 500, 16, "assets/images/textbox2.png");
     world = wf.newWorld(0, 300, false);
+    love.physics.setMeter(30);
     world:addCollisionClass("Platform");
     world:addCollisionClass("Player");
     world:addCollisionClass("Floor");
     world:addCollisionClass("Enemy");
     world:addCollisionClass("Bullet");
     love.window.setMode(800, 600, {resizable = true});
-
     love.graphics.setFont(love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20));
 
     player = Player();
@@ -39,28 +42,23 @@ function love.load()
 
     if gameMap.layers["floor"] then
         for i, obj in pairs(gameMap.layers["floor"].objects) do
-            local floor = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height);
-            floor:setType("static");
-            floor:setCollisionClass("Floor")
-            table.insert(platforms, floor)
+            Floor:new(obj.x, obj.y, obj.width, obj.height);
         end
     end
 
     if gameMap.layers["platforms"] then
         for i, obj in pairs(gameMap.layers["platforms"].objects) do
-            local platform = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height);
-            platform:setType("static");
-            platform:setCollisionClass("Platform")
-            table.insert(platforms, platform)
+            Platform:new(obj.x, obj.y, obj.width, obj.height);
         end
     end
 
     player.collider:setPreSolve(function(collider_1, collider_2, contact)
         if collider_1.collision_class == "Player" and collider_2.collision_class == "Platform" then
-            if (collider_1:getY() > collider_2:getY()) then
+            c1EdgeH, c2EdgeH = collider_1:getY()+18, collider_2:getY()-collider_2:getObject().height/2;
+            c1EdgeW, c2EdgeW = collider_1:getX()+9, collider_2:getX() + collider_2:getObject().width/2;
+            if ((c1EdgeH > c2EdgeH) and (c1EdgeW > (c2EdgeW-collider_2:getObject().width)) and (c1EdgeW-collider_1:getObject().width/2 < c2EdgeW)) then  --add half of player and subtract half of object colliding.
                 contact:setEnabled(false);
                 player.jump = 1;
-                --print(player.collider:getPosition());
             end
         end
     end) 
@@ -105,6 +103,7 @@ function love.draw()
     if guiStack:top() ~= nil then
         guiStack:top():draw();
     end
+
 end
 
 function love.resize()
@@ -112,60 +111,3 @@ function love.resize()
         guiStack:top():resize();
     end
 end
-    --[[SCRAP CODE]]
-    --[[world:setCallbacks(
-        function(collider_1, collider_2, contact) 
-            print("HERE");
-            print(collider_1:getBody():getY());
-            --if collider_1.collision_class == "Player" and collider_2.collision_class == "Platform" then
-                if (collider_1:getBody():getY() > collider_2:getBody():getY()) then
-                    contact:setEnabled(false);
-                    --print(player.collider:getPosition());
-                else
-                    player.jump = 0;
-                end
-            --end
-        end, 
-    function() 
-        
-    end, 
-    function()
-    
-    end
-    --[[function(collider_1, collider_2, contact) 
-        print("HERE");
-        print(collider_1:getBody():getY());
-        --if collider_1.collision_class == "Player" and collider_2.collision_class == "Platform" then
-            if (collider_1:getBody():getY() > collider_2:getBody():getY()) then
-                contact:setEnabled(false);
-                --print(player.collider:getPosition());
-            else
-                player.jump = 0;
-            end
-        --end
-    end, 
-    function() 
-         
-    end)]]
-
-        --[[enemy.collider:setPostSolve(function(collider_1, collider_2, contact)
-        if collider_1.collision_class == "Enemy" and collider_2.collision_class == "Bullet" then
-            enemy.health = enemy.health - 5;
-            print(enemy.health);
-            for i,v in pairs(listOfBullets) do
-                if v.collider == collider_2 then
-                    v.collider:destroy();
-                    table.remove(listOfBullets, i);
-                end
-            end
-            if enemy.health == 0 then
-                for i,v in pairs(enemys) do
-                    if v == enemy then
-                        table.remove(enemys, i);
-                        print("HERE");
-                    end
-                end
-                enemy.collider:destroy();
-            end
-        end
-    end)]]
