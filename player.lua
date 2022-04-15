@@ -11,6 +11,7 @@ function Player:new()
     self.collider = world:newRectangleCollider(self.x, self.y, self.width-30, self.height-12)
     self.collider:setCollisionClass("Player");
     self.collider:setFixedRotation(true);
+    self.collider:setObject(self);
 end
 
 function newAnimation(image, width, height, duration)
@@ -41,7 +42,7 @@ function Player:update(dt)
     initJumpVelocity = math.sqrt(2*gravity*jumpHeight);
     initImpulse = self.collider:getMass()*initJumpVelocity;
     if (love.keyboard.isDown("up")) and (self.jump==0) then
-        self.collider:applyLinearImpulse(0, -300); ---300
+        self.collider:applyLinearImpulse(0, -325); ---300
         self.jump = 1;
         return;
     end
@@ -58,7 +59,6 @@ function Player:update(dt)
 
     if self.collider:enter("Platform") or self.collider:enter("Floor") then
         self.jump = 0;
-        print(self.jump)
     end
     timer = timer + dt;
     --print(timer);
