@@ -12,13 +12,13 @@ function Enemy:new(x, y)
     self.collider = world:newRectangleCollider(self.x, self.y, self.width, self.height)
     self.collider:setCollisionClass("Enemy");
     self.collider:setFixedRotation(true);
-    self.collider:setType("static");
+    --self.collider:setType("static");
     self.image = love.graphics.newImage("enemy.png")
 
-    self.collider:setPostSolve(function(collider_1, collider_2, contact)
+    self.collider:setPreSolve(function(collider_1, collider_2, contact)
         if collider_2.collision_class == "Bullet" then
+            contact:setEnabled(false);
             self.health = self.health - 5;
-            --print(self.health);
             if self.health == 0 then
                 self.collider:destroy();
                 for i,v in pairs(enemys) do
@@ -30,6 +30,24 @@ function Enemy:new(x, y)
         end
     end)
 end
+
+function Enemy:move(xSpeed, ySpeed)
+    --vx, vy = self.collider:getLinearVelocity();  --[[Throw away useless first return value]]
+    self.collider:setLinearVelocity(xSpeed, ySpeed);
+end
+
+function Enemy:moveUntil(Xspeed, ySpeed, x, y)  --left off here
+    x = x + self.collider:getX();
+    y = y + self.collider:getY();
+    if (self.collider:getX() == x) and (self.collider:getY() == y) then
+        return true;
+    else
+        self.collider:setLinearVelocity(xSpeed, ySpeed)
+    end
+
+    --while (self.collider:)
+end
+
 
 
 function Enemy:draw()
