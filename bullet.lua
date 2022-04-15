@@ -17,7 +17,7 @@ function Bullet:new(x, y, dir)
     self.collider:setLinearVelocity(1000*dir, 0);
 
 
-    self.collider:setPostSolve(function(collider_1, collider_2, contact)            
+    self.collider:setPreSolve(function(collider_1, collider_2, contact) 
         for i,v in pairs(listOfBullets) do
             if v == self then
                 v.collider:destroy();
