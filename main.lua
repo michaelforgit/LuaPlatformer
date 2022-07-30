@@ -58,7 +58,9 @@ function love.load()
             c1EdgeW, c2EdgeW = collider_1:getX()+9, collider_2:getX() + collider_2:getObject().width/2;
             if ((c1EdgeH > c2EdgeH) and (c1EdgeW > (c2EdgeW-collider_2:getObject().width)) and (c1EdgeW-collider_1:getObject().width/2 < c2EdgeW)) then  --add half of player and subtract half of object colliding.
                 contact:setEnabled(false);
-                player.jump = 1;
+            end
+            if (c2EdgeH < c1EdgeH) then
+                contact:setEnabled(false)
             end
         end
     end) 

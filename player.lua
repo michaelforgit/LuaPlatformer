@@ -5,10 +5,10 @@ function Player:new()
     self.speed = 150;
     self.x = 0;
     self.y = 0;
-    self.height = 48;
-    self.width = 48;
+    self.height = 36;
+    self.width = 18;
     self.direction = 1;
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width-30, self.height-12)
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width, self.height)
     self.collider:setCollisionClass("Player");
     self.collider:setFixedRotation(true);
     self.collider:setObject(self);
@@ -57,9 +57,18 @@ function Player:update(dt)
     _, vy = self.collider:getLinearVelocity();  --[[Throw away useless first return value]]
     self.collider:setLinearVelocity(vx, vy);
 
-    if self.collider:enter("Platform") or self.collider:enter("Floor") then
-        self.jump = 0;
+    if self.collider:enter("Platform") then
+        local collision_data = self.collider:getEnterCollisionData('Platform').collider
+        if (self.collider:getY() < collision_data:getY()) then --[[Make sure the player is entering the platform from the top before enabling jump again]]
+            print("HERE")
+            self.jump = 0;
+        end
     end
+
+    if self.collider:enter("Floor") then
+        self.jump = 0;
+    end 
+
     timer = timer + dt;
     --print(timer);
     if timer >=.2 then
