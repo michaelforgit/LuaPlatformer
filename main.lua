@@ -16,7 +16,7 @@ function love.load()
     require "9slice";
 
     --testingBox = Slice(0, 0, 500, 500, 16, "assets/images/textbox2.png");
-    world = wf.newWorld(0, 300, false);
+    world = wf.newWorld(0, 700, false);
     love.physics.setMeter(30);
     world:addCollisionClass("Platform");
     world:addCollisionClass("Player");
@@ -60,6 +60,7 @@ function love.load()
                 contact:setEnabled(false);
             end
             if (c2EdgeH < c1EdgeH) then
+                print("hello")
                 contact:setEnabled(false)
             end
         end

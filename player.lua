@@ -42,6 +42,7 @@ function Player:update(dt)
     initJumpVelocity = math.sqrt(2*gravity*jumpHeight);
     initImpulse = self.collider:getMass()*initJumpVelocity;
     if (love.keyboard.isDown("up")) and (self.jump==0) then
+        print("JUMP")
         self.collider:applyLinearImpulse(0, -325); ---300
         self.jump = 1;
         return;
@@ -59,7 +60,7 @@ function Player:update(dt)
 
     if self.collider:enter("Platform") then
         local collision_data = self.collider:getEnterCollisionData('Platform').collider
-        if (self.collider:getY() < collision_data:getY()) then --[[Make sure the player is entering the platform from the top before enabling jump again]]
+        if ((self.collider:getY()+18) < (collision_data:getY()-collision_data:getObject().height/2)) then --[[Make sure the player is entering the platform from the top before enabling jump again]]
             print("HERE")
             self.jump = 0;
         end
