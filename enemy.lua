@@ -19,6 +19,7 @@ function Enemy:new(x, y)
         if collider_2.collision_class == "Bullet" then
             contact:setEnabled(false);
             self.health = self.health - 5;
+            --print(self.collider:getX())
             if self.health == 0 then
                 self.collider:destroy();
                 for i,v in pairs(enemys) do
@@ -30,23 +31,22 @@ function Enemy:new(x, y)
         end
     end)
 end
-
 function Enemy:move(xSpeed, ySpeed)
     --vx, vy = self.collider:getLinearVelocity();  --[[Throw away useless first return value]]
     self.collider:setLinearVelocity(xSpeed, ySpeed);
+    --print(self.collider:getX())
 end
 
-function Enemy:moveUntil(Xspeed, ySpeed, x, y)  --left off here
+--[[function Enemy:moveUntil(xSpeed, ySpeed, x, y)  --left off here
     x = x + self.collider:getX();
     y = y + self.collider:getY();
-    if (self.collider:getX() == x) and (self.collider:getY() == y) then
-        return true;
-    else
-        self.collider:setLinearVelocity(xSpeed, ySpeed)
+    test = 0;
+    while (self.collider:getX() < x) and (test <= 5) do
+        self:move(xSpeed, ySpeed)
+        test = test + 1
+        print (self.collider:getX())
     end
-
-    --while (self.collider:)
-end
+end]]--
 
 
 
@@ -60,6 +60,13 @@ function Enemy:draw()
 end
 
 function Enemy:update(dt)
+
+    if self.collider:enter('Bullet') then
+        while(self.collider:getX() < 150) do
+            self:move(20, 0)
+            print(self.collider:getX())
+        end
+    end
     self.x = self.collider:getX()-self.width/2;
     self.y = self.collider:getY()-self.height/2;
 end

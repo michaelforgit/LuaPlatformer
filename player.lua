@@ -5,10 +5,10 @@ function Player:new()
     self.speed = 150;
     self.x = 0;
     self.y = 0;
-    self.height = 48;
-    self.width = 48;
+    self.height = 36;
+    self.width = 18;
     self.direction = 1;
-    self.collider = world:newRectangleCollider(self.x, self.y, self.width-30, self.height-12)
+    self.collider = world:newRectangleCollider(self.x, self.y, self.width, self.height)
     self.collider:setCollisionClass("Player");
     self.collider:setFixedRotation(true);
     self.collider:setObject(self);
@@ -79,12 +79,11 @@ function Player:update(dt)
 end
 
 function Player:draw()
-
     local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1;
     if self.direction == -1 then
-        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x, self.y, 0, -1, 1, self.width, -3);
+        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x+self.width/2+5, self.y-5, 0, -1, 1, self.width, -3);
     else
-        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x, self.y, 0, 1, 1, 0, -3);
+        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x-self.width/2-5, self.y-5, 0, 1, 1, 0, -3);
     end
 end
 
