@@ -92,9 +92,9 @@ function Player:draw()
 
     local spriteNum = math.floor(animation.currentTime / animation.duration * #animation.quads) + 1;
     if self.direction == -1 then
-        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x, self.y, 0, -1, 1, self.width, -3);
+        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x+self.width/2+5, self.y-5, 0, -1, 1, self.width, -3);
     else
-        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x, self.y, 0, 1, 1, 0, -3);
+        love.graphics.draw(animation.spriteSheet, animation.quads[spriteNum], self.x-self.width/2-5, self.y-5, 0, 1, 1, 0, -3);
     end
 end
 
