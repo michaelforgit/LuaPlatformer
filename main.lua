@@ -16,7 +16,7 @@ function love.load()
     require "9slice";
 
     --testingBox = Slice(0, 0, 500, 500, 16, "assets/images/textbox2.png");
-    world = wf.newWorld(0, 300, false);
+    world = wf.newWorld(0, 700, false);
     love.physics.setMeter(30);
     world:addCollisionClass("Platform");
     world:addCollisionClass("Player");
@@ -58,7 +58,10 @@ function love.load()
             c1EdgeW, c2EdgeW = collider_1:getX()+9, collider_2:getX() + collider_2:getObject().width/2;
             if ((c1EdgeH > c2EdgeH) and (c1EdgeW > (c2EdgeW-collider_2:getObject().width)) and (c1EdgeW-collider_1:getObject().width/2 < c2EdgeW)) then  --add half of player and subtract half of object colliding.
                 contact:setEnabled(false);
-                player.jump = 1;
+            end
+            if (c2EdgeH < c1EdgeH) then
+                print("hello")
+                contact:setEnabled(false)
             end
         end
     end) 
