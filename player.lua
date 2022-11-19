@@ -43,7 +43,7 @@ function Player:update(dt)
     initImpulse = self.collider:getMass()*initJumpVelocity;
     if (love.keyboard.isDown("up")) and (self.jump==0) then
         print("JUMP")
-        self.collider:applyLinearImpulse(0, -325); ---300
+        self.collider:applyLinearImpulse(0, -500);
         self.jump = 1;
         return;
     end
