@@ -1,5 +1,5 @@
 Gamestate = require "assets/libraries/gamestate"    
-
+Object = require "assets/libraries/classic"
 Menu = require "gamestates/menu" -- previously: Gamestate.new()
 levelOne = require "gamestates/levelOne"
 camera = require "assets/libraries/camera"
@@ -18,7 +18,7 @@ require "9slice"
 
 function love.load()
     Gamestate.registerEvents()
-    Gamestate.switch(Menu)
+    Gamestate.switch(levelOne)
     love.window.setMode(800, 600, {resizable = true})
     love.graphics.setFont(love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20))
 end

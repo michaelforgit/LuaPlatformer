@@ -1,11 +1,8 @@
-local Class = require "assets/libraries/class"
-
-
-local Stack = Class{};
+Stack = Object.extend(Object)
 
 local stackArr = {}; 
 
-function Stack:init()
+function Stack:new()
     self.stackArr = {}
 end
 

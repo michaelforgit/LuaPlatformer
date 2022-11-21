@@ -1,7 +1,6 @@
-local Class = require "assets/libraries/class"
-local Menu = Class{}
+local Menu = {}
 require "uiobject"
-function Menu:init()
+function Menu:new()
     self.background = love.graphics.newImage('enemy.png')
 end
 function Menu:enter() -- runs every time the state is entered

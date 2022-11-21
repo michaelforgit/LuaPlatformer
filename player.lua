@@ -1,8 +1,6 @@
-local Class = require "assets/libraries/class"
-
-Player = Class{}
+Player = Object:extend(Object)
 bullets = {}
-function Player:init()
+function Player:new()
     self.jump = 0
     self.speed = 150
     self.x = 0

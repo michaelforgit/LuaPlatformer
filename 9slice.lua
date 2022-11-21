@@ -1,12 +1,11 @@
-local Class = require "assets/libraries/class"
-Slice = Class{}
+Slice = Object.extend(Object)
 --[[
 a b c
 d e f
 g h i
 ]]--
 
-function Slice:init(x, y, width, height, corner, asset)
+function Slice:new(x, y, width, height, corner, asset)
     self.x = x;
     self.y = y;
     self.width = width;
