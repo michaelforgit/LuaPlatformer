@@ -1,12 +1,12 @@
-Slice = Object:extend(object);
-
+local Class = require "assets/libraries/class"
+Slice = Class{}
 --[[
 a b c
 d e f
 g h i
 ]]--
 
-function Slice:new(x, y, width, height, corner, asset)
+function Slice:init(x, y, width, height, corner, asset)
     self.x = x;
     self.y = y;
     self.width = width;
@@ -35,3 +35,5 @@ end
 function Slice:draw()
     love.graphics.draw(spriteBatch);
 end
+
+return Slice

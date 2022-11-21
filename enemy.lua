@@ -1,6 +1,7 @@
-Enemy = Object.extend(Object);
+local Class = require "assets/libraries/class"
+Enemy = Class{}
 
-function Enemy:new(x, y)
+function Enemy:init(x, y)
     self.health = 100;
     self.jump = 0;
     self.speed = 150;

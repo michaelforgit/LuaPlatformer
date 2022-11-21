@@ -1,5 +1,7 @@
-UIObject = Object.extend(Object);
-function UIObject:new(specs)  --(x, y, width, height, closeSize, text)
+local Class = require "assets/libraries/class"
+local UIObject = Class{}
+local Slice = require "9slice"
+function UIObject:init(specs)  --(x, y, width, height, closeSize, text)
     self.x = specs[1];
     self.y = specs[2];
     --self.width = math.max(350, specs[3]);
@@ -35,14 +37,16 @@ function UIObject:update()
 
 end
 
-UIRectangle = UIObject:extend()
+UIRectangle = Class{
+    __extends = UIObject
+}
 
-function UIRectangle:new(specs)
-    UIRectangle.super.new(self, specs);
+function UIRectangle:init(specs)
+    UIObject.init(self, specs);
 end
 
 function UIRectangle:draw()
-    UIRectangle.super.draw(self);
+    UIObject.draw(self);
     if self.closeSize > 0 then
         love.graphics.setColor(255/255, 0, 0);
         love.graphics.rectangle("fill", self.x+self.width-self.closeSize, self.y, self.closeSize, self.closeSize);
