@@ -1,8 +1,32 @@
 local Class = require "assets/libraries/class"
+local UIObject = require "uiobject"
 local Menu = Class{}
-require "uiobject"
+local states = {first, second, third}
 function Menu:init()
-    self.background = love.graphics.newImage('enemy.png')
+    test = UIObject(
+        love.graphics.getWidth()-love.graphics.getWidth()/2, 
+        love.graphics.getHeight()/4, 
+        love.graphics.getWidth()/2, 
+        love.graphics.getHeight()/2, 
+        0,
+        true,
+        "Click here to enter the game",
+        function() 
+            print("Hello World") 
+        end
+    )
+    -- test2 = UIObject(
+    --     0, 
+    --     love.graphics.getHeight()/4, 
+    --     love.graphics.getWidth()/2, 
+    --     love.graphics.getHeight()/2, 
+    --     0,
+    --     true,
+    --     "Click here to bye world",
+    --     function() 
+    --         print("Bye world") 
+    --     end
+    -- )
 end
 function Menu:enter() -- runs every time the state is entered
     print("Entering menu state")
@@ -12,20 +36,12 @@ function Menu:update(dt) -- runs every frame
 
 end
 function Menu:draw()
-    test = UIRectangle({love.graphics.getWidth()/2-love.graphics.getWidth()/8, 
-    love.graphics.getHeight()-love.graphics.getHeight()/3.5, 
-    love.graphics.getWidth()/4, 
-    love.graphics.getHeight()/4, 
-    35,
-    "The quick brown fox jumped over the fence.  I do not know the rest this is just a test font."})
     test:draw()
-    love.graphics.print("Press enter to continue", 100, 100)
+    -- test2:draw()
 end
 
 function Menu:keyreleased(key, code)
-    if key == 'return' then
-        Gamestate.switch(levelOne)
-    end
+    
 end
 
 return Menu

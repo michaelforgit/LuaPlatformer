@@ -1,6 +1,5 @@
 local Class = require "assets/libraries/class"
 
-
 local Stack = Class{};
 
 local stackArr = {}; 

@@ -3,7 +3,6 @@ Gamestate = require "assets/libraries/gamestate"
 local levelOne = {}
 
 function levelOne:enter()
-
     --testingBox = Slice(0, 0, 500, 500, 16, "assets/images/textbox2.png")
     world = wf.newWorld(0, 700, false)
     love.physics.setMeter(30)
