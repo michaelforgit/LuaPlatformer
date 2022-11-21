@@ -1,6 +1,7 @@
-Bullet = Object:extend(Object);
+local Class = require "assets/libraries/class"
+Bullet = Class{}
 
-function Bullet:new(x, y, dir)
+function Bullet:init(x, y, dir)
     self.image = love.graphics.newImage("assets/images/teamgunner/EXTRAS/bullet2.png");
     self.width = 10;
     self.height = 5;

@@ -1,6 +1,7 @@
-Collidable = Object.extend(Object);
+local Class = require "assets/libraries/class"
+local Collidable = Class{}
 
-function Collidable:new(x, y, width, height)
+function Collidable:init(x, y, width, height)
     self.x = x;
     self.y = y;
     self.width = width;
@@ -10,17 +11,21 @@ function Collidable:new(x, y, width, height)
     self.collider:setObject(self);
 end
 
-Platform = Collidable:extend()
+Platform = Class{
+    __includes = Collidable
+}
 
-function Platform:new(x, y, width, height)
-    Platform.super.new(self, x, y, width, height);
+function Platform:init(x, y, width, height)
+    Collidable.init(self, x, y, width, height);
     self.collider:setCollisionClass("Platform");
 end
 
-Floor = Collidable:extend()
+Floor = Class{
+    __includes = Collidable
+}
 
-function Floor:new(x, y, width, height)
-    Floor.super.new(self, x, y, width, height);
+function Floor:init(x, y, width, height)
+    Collidable.init(self, x, y, width, height);
     self.collider:setCollisionClass("Floor");
 end
 
