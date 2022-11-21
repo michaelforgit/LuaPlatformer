@@ -1,4 +1,4 @@
-local UIObject = Object.extend(Object)
+local UIObject = Object:extend()
 function UIObject:new(specs)  --(x, y, width, height, closeSize, text)
     self.x = specs[1];
     self.y = specs[2];

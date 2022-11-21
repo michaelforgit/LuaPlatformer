@@ -1,4 +1,4 @@
-Slice = Object.extend(Object)
+Slice = Object:extend()
 --[[
 a b c
 d e f
@@ -35,4 +35,3 @@ function Slice:draw()
     love.graphics.draw(spriteBatch);
 end
 
-return Slice

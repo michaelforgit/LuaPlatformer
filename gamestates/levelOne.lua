@@ -1,4 +1,3 @@
-Gamestate = require "assets/libraries/gamestate"
 
 local levelOne = {}
 

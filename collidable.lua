@@ -1,4 +1,4 @@
-Collidable = Object.extend(Object);
+Collidable = Object:extend();
 
 function Collidable:new(x, y, width, height)
     self.x = x;

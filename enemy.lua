@@ -1,4 +1,4 @@
-Enemy = Object.extend(Object)
+Enemy = Object:extend()
 
 function Enemy:new(x, y)
     self.health = 100;

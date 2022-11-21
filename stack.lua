@@ -1,4 +1,4 @@
-Stack = Object.extend(Object)
+Stack = Object:extend()
 
 local stackArr = {}; 
 

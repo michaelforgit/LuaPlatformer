@@ -1,4 +1,4 @@
-Player = Object:extend(Object)
+Player = Object:extend()
 bullets = {}
 function Player:new()
     self.jump = 0
