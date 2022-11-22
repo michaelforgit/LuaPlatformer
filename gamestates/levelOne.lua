@@ -1,4 +1,3 @@
-
 local levelOne = {}
 
 function levelOne:enter()

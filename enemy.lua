@@ -1,5 +1,4 @@
 Enemy = Object:extend()
-
 function Enemy:new(x, y)
     self.health = 100;
     self.jump = 0;

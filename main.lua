@@ -19,7 +19,7 @@ require "9slice"
 function love.load()
     Gamestate.registerEvents()
     Gamestate.switch(Menu)
-    love.window.setMode(800, 600, {resizable = true})
+    love.window.setMode(1280, 720, {resizable = true})
     love.graphics.setFont(love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20))
 end
 
@@ -30,7 +30,6 @@ function love.update(dt)
 end
 
 function love.draw()
-
 end
 
 function love.resize()
