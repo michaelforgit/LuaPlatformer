@@ -15,11 +15,12 @@ require "stack"
 require "uiobject"
 require "collidable"
 require "9slice"
+require "uiobject"
+
 
 function love.load()
     Gamestate.registerEvents()
     Gamestate.switch(Menu)
-    love.window.setMode(1280, 720, {resizable = true})
     love.graphics.setFont(love.graphics.newFont("assets/fonts/Abaddon Light.ttf", 20))
 end
 

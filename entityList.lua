@@ -1,17 +1,22 @@
 entityList = Object:extend()
 
 function entityList:new()
-    print("I SHOULD BE IN NEW")
     self.entities = {}
 end
 
 function entityList:add(obj)
     table.insert(self.entities, obj)
-    print(self.entities[1])
+    print(self:count())
 end
 
-function entityList:remove(obj)
-    table.remove(self.entities, obj)
+function entityList:removeSelf(entity)
+    print("in remove self")
+    for i, v in ipairs(self.entities) do
+        if v == entity then
+            print("SHOULD BE REMOVING")
+            table.remove(self.entities, i)
+        end
+    end
 end
 
 function entityList:top()
@@ -30,6 +35,12 @@ function entityList:update(dt)
     end
 end
 
+function entityList:mousepressed(x, y, button)
+    for i, v in ipairs(self.entities) do
+        v:mousepressed(x, y, button)
+    end
+end
+
 function entityList:clear()
     self.entityList = {}
 end
@@ -41,5 +52,11 @@ end
 function entityList:print()
     for i,v in pairs(self.entities) do
         print(v)
+    end
+end
+
+function entityList:resize()
+    for i, v in ipairs(self.entities) do
+        v:resize()
     end
 end
