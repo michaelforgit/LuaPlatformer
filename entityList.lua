@@ -9,11 +9,11 @@ function entityList:add(obj)
     print(self:count())
 end
 
-function entityList:removeSelf(entity)
-    print("in remove self")
+function entityList:remove(entity)
+    print(entity)
+    print("ENTITY IS ^")
     for i, v in ipairs(self.entities) do
         if v == entity then
-            print("SHOULD BE REMOVING")
             table.remove(self.entities, i)
         end
     end
@@ -31,18 +31,23 @@ end
 
 function entityList:update(dt)
     for i, v in ipairs(self.entities) do
+        if v.remove then
+            table.remove(self.entities, i)
+        end
         v:update(dt)
     end
 end
 
 function entityList:mousepressed(x, y, button)
     for i, v in ipairs(self.entities) do
-        v:mousepressed(x, y, button)
+        if v:is(UIButton) then
+            v:mousepressed(x, y, button)
+        end
     end
 end
 
 function entityList:clear()
-    self.entityList = {}
+    self.entities = {}
 end
 
 function entityList:count()
