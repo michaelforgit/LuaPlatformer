@@ -6,12 +6,9 @@ end
 
 function entityList:add(obj)
     table.insert(self.entities, obj)
-    print(self:count())
 end
 
 function entityList:remove(entity)
-    print(entity)
-    print("ENTITY IS ^")
     for i, v in ipairs(self.entities) do
         if v == entity then
             table.remove(self.entities, i)

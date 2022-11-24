@@ -35,7 +35,6 @@ function levelOne:enter()
                 contact:setEnabled(false)
             end
             if (c2EdgeH < c1EdgeH) then
-                print("hello")
                 contact:setEnabled(false)
             end
         end
@@ -73,6 +72,12 @@ function levelOne:draw()
         player:draw()
         world:draw()
     cam:detach()
+end
+
+function levelOne:keypressed(key)
+    if key == "escape" then
+        Gamestate.switch(Menu)
+    end
 end
 
 return levelOne
